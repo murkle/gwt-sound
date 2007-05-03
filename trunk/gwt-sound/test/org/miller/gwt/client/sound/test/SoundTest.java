@@ -33,6 +33,7 @@ public class SoundTest extends GWTTestCase {
 
 	public void testCreateSound1() {
 		sm.createSound(SOUND_ID, "sound/Mist.mp3");
+		sm.play(SOUND_ID);
 		assertNotNull(sm.getSoundById(SOUND_ID));
 		sm.destroySound(SOUND_ID);
 	}
@@ -40,18 +41,30 @@ public class SoundTest extends GWTTestCase {
 	public void testCreateSound2() {
 		sm.createSound(new Option[] { SoundOptions.id(SOUND_ID),
 				SoundOptions.url("sound/Mist.mp3") });
+		sm.play(SOUND_ID);
 		assertNotNull(sm.getSoundById(SOUND_ID));
 		sm.destroySound(SOUND_ID);
 	}
-	
-	public void testPlay() {
+
+	public void testPlay1() {
 		sm.getDefaultOptions().onID3(new Callback() {
 			public void execute() {
 				SMSound sound = sm.getSoundById(SOUND_ID);
 				assertNotNull(sound.getID3());
-				System.out.println(sound.getID3().getV1().getArtist());
+				//System.out.println(sound.getID3().getV1().getArtist());
 			}
 		});
 		sm.play(SOUND_ID, "sound/Mist.mp3");
+	}
+
+	public void testPlay2() {
+		sm.createSound(SOUND_ID, "sound/Mist.mp3");
+		sm.play(SOUND_ID, new Option[] { SoundOptions.onID3(new Callback() {
+					public void execute() {
+						SMSound sound = sm.getSoundById(SOUND_ID);
+						assertNotNull(sound.getID3());
+						System.out.println(sound.getID3().getV1().getArtist());
+					}
+				}) });
 	}
 }
