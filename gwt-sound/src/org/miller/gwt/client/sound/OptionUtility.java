@@ -34,9 +34,9 @@ public class OptionUtility {
 
 	private static native void addCallback(JavaScriptObject jso, String name,
 			Callback callback) /*-{
-	 jso[name] = function(obj)
+	 jso[name] = function()
 	 {
-	 callback.@org.miller.get.client.sound.Callback::execute()();
+	 callback.@org.miller.gwt.client.sound.Callback::execute()();
 	 };
 	 }-*/;
 
