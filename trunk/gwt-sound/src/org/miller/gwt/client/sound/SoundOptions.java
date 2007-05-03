@@ -10,6 +10,10 @@ public class SoundOptions {
 		return new Option("id", id);
 	}
 	
+	public static Option url(String url) {
+		return new Option("url", url);
+	}
+	
 	public static Option autoPlay(boolean auto) {
 		return new Option("autoPlay", auto);
 	}
