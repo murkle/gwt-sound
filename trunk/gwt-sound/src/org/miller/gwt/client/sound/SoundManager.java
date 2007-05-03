@@ -251,8 +251,8 @@ public class SoundManager {
 	 $soundManager.nullURL=url;
 	 }-*/;
 
-	public void createSound(JavaScriptObject obj) {
-		executeCreateSound(obj);
+	public void createSound(Option[] opts) {
+		executeCreateSound(OptionUtility.buildOptions(opts));
 	}
 
 	private native void executeCreateSound(JavaScriptObject obj)/*-{
@@ -283,8 +283,8 @@ public class SoundManager {
 	 $wnd.soundManager.play(id, {}); 	
 	 }-*/;
 
-	public void play(String id, JavaScriptObject obj) {
-		executePlay(id, obj);
+	public void play(String id, Option[] opts) {
+		executePlay(id, OptionUtility.buildOptions(opts));
 	}
 
 	private native void executePlay(String id, JavaScriptObject obj) /*-{
