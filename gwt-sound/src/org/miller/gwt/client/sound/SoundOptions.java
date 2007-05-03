@@ -14,159 +14,67 @@ public class SoundOptions {
 		return new Option("autoPlay", auto);
 	}
 	
-	private native void setAutoPlay(boolean auto)/*-{
-	 $wnd.soundManager.defaultOptions.autoPlay = auto;
-	 }-*/;
-
-	public void autoLoad(boolean auto) {
-		setAutoLoad(auto);
+	public Option autoLoad(boolean auto) {
+		return new Option("autoLoad", auto);
 	}
 
-	private native void setAutoLoad(boolean auto)/*-{
-	 $wnd.soundManager.defaultOptions.autoLoad = auto;
-	 }-*/;
-
-	public void multiShot(boolean multishot) {
-		setMultiShot(multishot);
+	public Option multiShot(boolean multishot) {
+		return new Option("multiShot", multishot);
 	}
 
-	private native void setMultiShot(boolean multishot)/*-{
-	 $wnd.soundManager.defaultOptions.multiShot = multishot;
-	 }-*/;
-
-	public void pan(int pan) {
-		setPan(pan);
+	public Option pan(int pan) {
+		return new Option("pan", pan);
 	}
 
-	private native void setPan(int pan)/*-{
-	 $wnd.soundManager.defaultOptions.pan = pan;
-	 }-*/;
-
-	public void volume(int volume) {
-		setVolume(volume);
+	public Option volume(int volume) {
+		return new Option("volume", volume);
 	}
 
-	private native void setVolume(int volume) /*-{
-	 $wnd.soundManagerdefaultOptions.volume(volume); 	
-	 }-*/;
-
-	public void whileLoading(Callback callback) {
-		executeWhileLoading(callback);
+	public Option whileLoading(Callback callback) {
+		return new Option("whileloading", callback);
 	}
 
-	private native boolean executeWhileLoading(Callback callback)/*-{
-	 $wnd.soundManager.defaultOptions.whileloading = function() {		
-	 callback.@org.miller.gwt.client.sound.Callback::execute()();
-	 }
-	 }-*/;
-
-	public void whilePlaying(Callback callback) {
-		executeWhilePlaying(callback);
+	public Option whilePlaying(Callback callback) {
+		return new Option("whileplaying", callback);
 	}
 
-	private native boolean executeWhilePlaying(Callback callback)/*-{
-	 $wnd.soundManager.defaultOptions.whileplaying = function() {		
-	 callback.@org.miller.gwt.client.sound.Callback::execute()();
-	 }
-	 }-*/;
-
-	public void onLoad(Callback callback) {
-		executeOnLoad(callback);
+	public Option onLoad(Callback callback) {
+		return new Option("onload", callback);
 	}
 
-	private native void executeOnLoad(Callback callback)/*-{
-	 $wnd.soundManager.defaultOptions.onload = function() {		
-	 callback.@org.miller.gwt.client.sound.Callback::execute()();
-	 }
-	 }-*/;
-
-	public void onPlay(Callback callback) {
-		executeOnPlay(callback);
+	public Option onPlay(Callback callback) {
+		return new Option("onplay", callback);
 	}
 
-	private native void executeOnPlay(Callback callback)/*-{
-	 $wnd.soundManager.defaultOptions.onplay = function() {		
-	 callback.@org.miller.gwt.client.sound.Callback::execute()();
-	 }
-	 }-*/;
-
-	public void onStop(Callback callback) {
-		executeOnStop(callback);
+	public Option onStop(Callback callback) {
+		return new Option("onstop", callback);
 	}
 
-	private native void executeOnStop(Callback callback) /*-{
-	 $wnd.soundManager.defaultOptions.onstop = function() {		
-	 callback.@org.miller.gwt.client.sound.Callback::execute()();
-	 }
-	 }-*/;
-
-	public void onFinish(Callback callback) {
-		executeOnFinish(callback);
+	public Option onFinish(Callback callback) {
+		return new Option("onfinish", callback);
 	}
 
-	private native void executeOnFinish(Callback callback) /*-{
-	 $wnd.soundManager.defaultOptions.onfinish = function() {		
-	 callback.@org.miller.gwt.client.sound.Callback::execute()();
-	 }
-	 }-*/;
-
-	public void onBeforeFinishComplete(Callback callback) {
-		executeOnBeforeFinishComplete(callback);
+	public Option onBeforeFinishComplete(Callback callback) {
+		return new Option("onbeforefinishcomplete", callback);
 	}
 
-	private native void executeOnBeforeFinishComplete(Callback callback) /*-{
-	 $wnd.soundManager.defaultOptions.onbeforefinishcomplete = function() {		
-	 callback.@org.miller.gwt.client.sound.Callback::execute()();
-	 }
-	 }-*/;
-
-	public void onBeforeFinishTime(Callback callback) {
-		executeOnBeforeFinishTime(callback);
+	public Option onBeforeFinishTime(Callback callback) {
+		return new Option("onBeforeFinishTime", callback);
 	}
 
-	private native void executeOnBeforeFinishTime(Callback callback) /*-{
-	 $wnd.soundManager.defaultOptions.onbeforefinishtime = function() {		
-	 callback.@org.miller.gwt.client.sound.Callback::execute()();
-	 }
-	 }-*/;
-
-	public void onBeforeFinish(Callback callback) {
-		executeOnBeforeFinish(callback);
+	public Option onBeforeFinish(Callback callback) {
+		return new Option("onBeforeFinish", callback);
 	}
 
-	private native void executeOnBeforeFinish(Callback callback) /*-{
-	 $wnd.soundManager.defaultOptions.onbeforefinish = function() {		
-	 callback.@org.miller.gwt.client.sound.Callback::execute()();
-	 }
-	 }-*/;
-
-	public void onJustBeforeFinish(Callback callback) {
-		executeOnJustBeforeFinish(callback);
+	public Option onJustBeforeFinish(Callback callback) {
+		return new Option("onjustbeforefinish", callback);
 	}
 
-	private native void executeOnJustBeforeFinish(Callback callback) /*-{
-	 $wnd.soundManager.defaultOptions.onjustbeforefinish = function() {		
-	 callback.@org.miller.gwt.client.sound.Callback::execute()();
-	 }
-	 }-*/;
-
-	public void onJustBeforeFinishTime(Callback callback) {
-		executeOnJustBeforeFinishTime(callback);
+	public Option onJustBeforeFinishTime(Callback callback) {
+		return new Option("onjustbeforefinishtime", callback);
 	}
 
-	private native void executeOnJustBeforeFinishTime(Callback callback) /*-{
-	 $wnd.soundManager.defaultOptions.onjustbeforefinishtime = function() {		
-	 callback.@org.miller.gwt.client.sound.Callback::execute()();
-	 }
-	 }-*/;
-
-	public void onID3(Callback callback) {
-		executeOnID3(callback);
+	public Option onID3(Callback callback) {
+		return new Option("onid3", callback);
 	}
-
-	private native void executeOnID3(Callback callback)/*-{
-	 $wnd.soundManager.defaultOptions.onid3 = function() {
-	 callback.@org.miller.gwt.client.sound.Callback::execute()();
-	 }
-	 }-*/;
 }
