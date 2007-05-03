@@ -2,8 +2,10 @@ package org.miller.gwt.client;
 
 import org.miller.gwt.client.sound.Callback;
 import org.miller.gwt.client.sound.ID3;
+import org.miller.gwt.client.sound.Option;
 import org.miller.gwt.client.sound.SMSound;
 import org.miller.gwt.client.sound.SoundManager;
+import org.miller.gwt.client.sound.SoundOptions;
 
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.user.client.Timer;
@@ -42,7 +44,7 @@ public class Sound implements EntryPoint {
 						+ sound.getDuration());
 			}
 		};
-		
+
 		sm.getDefaultOptions().onID3(new Callback() {
 			public void execute() {
 				SMSound sound = sm.getSoundById(SOUND_ID);
@@ -64,19 +66,26 @@ public class Sound implements EntryPoint {
 				info.setText(6, 1, id3.getV1().getYear());
 			}
 		});
-		
+
 		sm.getDefaultOptions().onPlay(new Callback() {
 			public void execute() {
 				timer.scheduleRepeating(1000);
 			}
-		});		
+		});
 
 		play.addClickListener(new ClickListener() {
 			public void onClick(Widget sender) {
-				sm.play(SOUND_ID, "sound/Mist.mp3");
 				duration.setText("0/0");
-				//sm.createSound(SOUND_ID, "sound/Mist.mp3");
-				//sm.play(SOUND_ID);				
+				// sm.play(SOUND_ID, "sound/Mist.mp3");
+				// sm.createSound(SOUND_ID, "sound/Mist.mp3");
+				sm.createSound(new Option[] { SoundOptions.id(SOUND_ID),
+						SoundOptions.url("sound/Mist.mp3"),
+						SoundOptions.onLoad(new Callback() {
+							public void execute() {
+								Window.alert("loaded");
+							}
+						}) });
+				sm.play(SOUND_ID);
 			}
 		});
 
@@ -95,6 +104,7 @@ public class Sound implements EntryPoint {
 		stop.addClickListener(new ClickListener() {
 			public void onClick(Widget sender) {
 				sm.stop(SOUND_ID);
+				sm.destroySound(SOUND_ID);
 				timer.cancel();
 				duration.setText("0/0");
 			}
