@@ -19,6 +19,6 @@
     </script>
     
 	<!-- Specify the app entry point class.                   -->
-	<entry-point class='org.miller.gwt.client.Sound'/>
+<!--	<entry-point class='org.miller.gwt.client.Sound'/>-->
 
 </module>
