@@ -27,7 +27,7 @@ public class OptionUtility {
 			if (value instanceof Callback)
 				addCallback(jso, opts[i].getName(), (Callback) value);
 			else
-				addOption(jso, opts[i].getName(), value);
+				addOption(jso, opts[i].getName(), (String)value);
 		}
 		return jso;
 	}
@@ -41,7 +41,7 @@ public class OptionUtility {
 	 }-*/;
 
 	private static native void addOption(JavaScriptObject jso, String name,
-			Object value) /*-{
+			String value) /*-{
 	 jso[name] = value;
 	 }-*/;
 

@@ -1,6 +1,7 @@
 package org.miller.gwt.client.sound;
 
 import com.google.gwt.core.client.JavaScriptObject;
+import com.google.gwt.user.client.Window;
 
 public class SoundManager {
 
@@ -252,11 +253,15 @@ public class SoundManager {
 	 }-*/;
 
 	public void createSound(Option[] opts) {
+		try {
 		executeCreateSound(OptionUtility.buildOptions(opts));
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	private native void executeCreateSound(JavaScriptObject obj)/*-{
-	 $wnd.soundManager.createSound(obj); 	
+	 $wnd.soundManager.createSound(obj);
 	 }-*/;
 
 	public void createSound(String id, String path) {

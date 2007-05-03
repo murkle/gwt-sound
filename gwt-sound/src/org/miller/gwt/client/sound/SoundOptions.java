@@ -15,11 +15,11 @@ public class SoundOptions {
 	}
 	
 	public static Option autoPlay(boolean auto) {
-		return new Option("autoPlay", auto);
+		return new Option("autoPlay", ""+ auto);
 	}
 	
 	public static Option autoLoad(boolean auto) {
-		return new Option("autoLoad", auto);
+		return new Option("autoLoad", "" +auto);
 	}
 
 	public static Option multiShot(boolean multishot) {
