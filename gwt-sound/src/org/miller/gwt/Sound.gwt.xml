@@ -1,0 +1,24 @@
+<module>
+
+	<!-- Inherit the core Web Toolkit stuff.                  -->
+	<inherits name='com.google.gwt.user.User'/>
+	<inherits name='org.miller.gwt.Sound'/>
+  
+    <script src="soundmanager2.js">
+        <![CDATA[  
+	        $wnd.soundManager.debugMode = false;      // enable debugging output (div#soundmanager-debug, OR console..)
+			$wnd.soundManager.useConsole = false;     // use firebug/safari console.log()-type debug console if available
+			$wnd.soundManager.consoleOnly = false;   // if console is being used, do not create/write to #soundmanager-debug
+			$wnd.soundManager.allowPolling = true;   // allow flash to poll for status update..
+        	$wnd.soundManager.beginInit();	        
+			if($wnd.soundManager.play)
+				return true;
+			else
+				return false;
+	    ]]>     	
+    </script>
+    
+	<!-- Specify the app entry point class.                   -->
+	<entry-point class='org.miller.gwt.client.Sound'/>
+
+</module>
