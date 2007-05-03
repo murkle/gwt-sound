@@ -48,6 +48,21 @@ public class Option {
 		this.name = name;
 		this.value = Double.toString(value);
 	}
+	
+	public Option(String name, boolean value) {
+		this.name = name;
+		this.value = Boolean.toString(value);
+	}
+	
+	public Option(String name, int value) {
+		this.name = name;
+		this.value = Integer.toString(value);
+	}
+	
+	public Option(String name, float value) {
+		this.name = name;
+		this.value = Float.toString(value);
+	}
 
 	public Option(String name, Callback callback) {
 		this.name = name;
