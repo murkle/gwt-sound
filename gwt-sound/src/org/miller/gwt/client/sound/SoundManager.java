@@ -172,7 +172,6 @@ public class SoundManager {
 	}
 
 	private SoundManager() {
-		init();
 	}
 
 	public static SoundManager getInstance() {
@@ -184,9 +183,6 @@ public class SoundManager {
 	public DefaultOptions getDefaultOptions() {
 		return defaultOptions;
 	}
-
-	private native void init() /*-{	 
-	 }-*/;
 
 	public void setSoundManagerURL(String url) {
 		soundManagerURL(url);
