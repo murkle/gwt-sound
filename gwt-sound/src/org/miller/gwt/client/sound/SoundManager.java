@@ -1,5 +1,8 @@
 package org.miller.gwt.client.sound;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.user.client.Window;
 
@@ -510,4 +513,22 @@ public class SoundManager {
 	 callback.@org.miller.gwt.client.sound.Callback::execute()();
 	 }
 	 }-*/;
+	
+	ArrayList soundIDs = new ArrayList();
+	public List getSoundIDs() {
+		soundIDs.clear();
+		soundIDs();
+		return soundIDs;
+	}
+	
+	private native void soundIDs()/*-{
+		var ids = $wnd.soundManager.soundIDs;
+		for(var i = 0; i < ids.length; i++) {
+			this.@org.miller.gwt.client.sound.SoundManager::addSoundID(Ljava/lang/String;)(ids[i]);
+		}
+	}-*/;
+	
+	private void addSoundID(String id) {
+		soundIDs.add(id);
+	}
 }
