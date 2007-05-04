@@ -1,52 +1,61 @@
 = Example Code = 
 
 {{{
-                final String SOUND_ID = "soundID";
+        final SoundManager sm = SoundManager.getInstance();
+
+	private List soundIDs;
+
+	private int playListIndex = 0;
+
+	/**
+	 * This is the entry point method.
+	 */
+	public void onModuleLoad() {
 		final Button play = new Button("Play");
-		final Button pause = new Button("Pause");
-		final Button resume = new Button("Resume");
+		final Button toggle = new Button("Pause");
 		final Button stop = new Button("Stop");
+		final Button next = new Button("Next");
+		final Button back = new Button("Back");
 		final Label duration = new Label("0/0");
 		final HorizontalPanel player = new HorizontalPanel();
-		final SoundManager sm = SoundManager.getInstance();
 		final FlexTable info = new FlexTable();
 
 		final Timer timer = new Timer() {
 			public void run() {
-				SMSound sound = sm.getSoundById(SOUND_ID);
+				SMSound sound = sm.getSoundById((String) soundIDs
+						.get(playListIndex));
 				duration.setText("" + sound.getPosition() + "/"
 						+ sound.getDuration());
 			}
 		};
 
-		sm.getDefaultOptions().onID3(new Callback() {
+		sm.setDebugMode(true);
+		sm.getDefaultOptions().autoLoad(true);
+		sm.getDefaultOptions().onFinish(new Callback() {
 			public void execute() {
-				SMSound sound = sm.getSoundById(SOUND_ID);
-				ID3 id3 = sound.getID3();
-				info.setWidget(0, 0, new Label("Comment"));
-				info.setWidget(1, 0, new Label("Album"));
-				info.setWidget(2, 0, new Label("Genre"));
-				info.setWidget(3, 0, new Label("Song Name"));
-				info.setWidget(4, 0, new Label("Artist"));
-				info.setWidget(5, 0, new Label("Track"));
-				info.setWidget(6, 0, new Label("Year"));
-
-				info.setText(0, 1, id3.getV1().getComment());
-				info.setText(1, 1, id3.getV1().getAlbum());
-				info.setText(2, 1, id3.getV1().getGenre());
-				info.setText(3, 1, id3.getV1().getSongName());
-				info.setText(4, 1, id3.getV1().getArtist());
-				info.setText(5, 1, id3.getV1().getTrack());
-				info.setText(6, 1, id3.getV1().getYear());
+				playListIndex++;
+				sm.play((String) soundIDs.get(playListIndex));
 			}
 		});
-
+		sm.getDefaultOptions().onLoad(new Callback() {
+			public void execute() {
+				play.setEnabled(true);
+				soundIDs = sm.getSoundIDs();
+				updateID3(info);
+			}
+		});
 		sm.getDefaultOptions().onPlay(new Callback() {
 			public void execute() {
 				timer.scheduleRepeating(1000);
 			}
 		});
+		sm.onLoad(new Callback() {
+			public void execute() {
+				sm.loadFromXML("sound/playlist.xml");
+			}
+		});
 
+		play.setEnabled(false);
 		play.addClickListener(new ClickListener() {
 			public void onClick(Widget sender) {
 				duration.setText("0/0");
@@ -63,55 +72,85 @@
 				 * 
 				 * 4.) sm.loadFromXML(XML); sm.play(SOUND_ID);
 				 */
-
-				final String XML = "<items baseHref=\"sound/\">"
-						+ "<sound id=\"Mist\" href=\"Mist.mp3\"/>"
-						+ "<sound id=\"Hello\" href=\"Hello.mp3\"/>"
-						+ "</items>";
-				sm.loadFromXML(XML);
-				sm.play("Mist", new Option[] {
-						SoundOptions.onFinish(new Callback() {
-							public void execute() {
-								sm.play("Hello");
-							}
-						})
-				});
+				sm.play((String) soundIDs.get(playListIndex));
 			}
 		});
 
-		pause.addClickListener(new ClickListener() {
+		toggle.addClickListener(new ClickListener() {
 			public void onClick(Widget sender) {
-				sm.pause(SOUND_ID);
-			}
-		});
-
-		resume.addClickListener(new ClickListener() {
-			public void onClick(Widget sender) {
-				sm.resume(SOUND_ID);
+				toggle.setText(toggle.getText().equals("Resume") ? "Pause"
+						: "Resume");
+				sm.togglePause((String) soundIDs.get(playListIndex));
 			}
 		});
 
 		stop.addClickListener(new ClickListener() {
 			public void onClick(Widget sender) {
-				sm.stop(SOUND_ID);
-				sm.destroySound(SOUND_ID);
+				sm.stop((String) soundIDs.get(playListIndex));
 				timer.cancel();
 				duration.setText("0/0");
 			}
 		});
 
-		sm.onLoad(new Callback() {
-			public void execute() {
-				duration.setText("Ready...");
+		back.addClickListener(new ClickListener() {
+			public void onClick(Widget sender) {
+				sm.stop((String)soundIDs.get(playListIndex));
+				if(playListIndex > 0)
+					playListIndex--;
+				sm.play((String)soundIDs.get(playListIndex));
 			}
 		});
-
+		
+		next.addClickListener(new ClickListener() {
+			public void onClick(Widget sender) {
+				sm.stop((String)soundIDs.get(playListIndex));
+				if(playListIndex < (soundIDs.size() - 1))
+					playListIndex++;
+				sm.play((String)soundIDs.get(playListIndex));
+			}
+		});
+		
+		player.add(back);
 		player.add(play);
-		player.add(pause);
-		player.add(resume);
+		player.add(toggle);
 		player.add(stop);
+		player.add(next);
 		player.add(duration);
 
 		RootPanel.get().add(player);
 		RootPanel.get().add(info);
+	}
+
+	public void updateID3(FlexTable info) {
+		SMSound sound = sm.getSoundById((String) soundIDs.get(playListIndex));
+		ID3 id3 = sound.getID3();
+		info.setWidget(0, 0, new Label("Comment"));
+		info.setWidget(1, 0, new Label("Album"));
+		info.setWidget(2, 0, new Label("Genre"));
+		info.setWidget(3, 0, new Label("Song Name"));
+		info.setWidget(4, 0, new Label("Artist"));
+		info.setWidget(5, 0, new Label("Track"));
+		info.setWidget(6, 0, new Label("Year"));
+
+		try {
+			info.setText(0, 1, id3.getV1().getComment());
+			info.setText(1, 1, id3.getV1().getAlbum());
+			info.setText(2, 1, id3.getV1().getGenre());
+			info.setText(3, 1, id3.getV1().getSongName());
+			info.setText(4, 1, id3.getV1().getArtist());
+			info.setText(5, 1, id3.getV1().getTrack());
+			info.setText(6, 1, id3.getV1().getYear());
+		} catch (Exception e) {
+			info.setText(0, 1, id3.getV2().getOriginalLyricistTextWriter());
+			info.setText(1, 1, id3.getV2().getOriginalAlbumMovieShowTitle());
+			info.setText(2, 1, id3.getV2().getContentGroupDescription());
+			info
+					.setText(3, 1, id3.getV2()
+							.getTitleSongNameContentDescription());
+			info.setText(4, 1, id3.getV2().getOriginalArtistPerformer());
+			info.setText(5, 1, id3.getV2().getTrackNumberPositionInSet());
+			info.setText(6, 1, id3.getV2().getYear());
+		}
+
+	}
 }}}
