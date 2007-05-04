@@ -181,7 +181,6 @@ public class ID3 {
 		try {
 			return property(property);
 		} catch (Exception e) {
-			e.printStackTrace();
 			return "Not Found";
 		}
 	}
