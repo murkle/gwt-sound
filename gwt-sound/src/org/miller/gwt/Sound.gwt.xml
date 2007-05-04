@@ -6,15 +6,15 @@
   
     <script src="soundmanager2.js">
         <![CDATA[  
-	        $wnd.soundManager.debugMode = false;      // enable debugging output (div#soundmanager-debug, OR console..)
-			$wnd.soundManager.useConsole = false;     // use firebug/safari console.log()-type debug console if available
-			$wnd.soundManager.consoleOnly = false;   // if console is being used, do not create/write to #soundmanager-debug
-			$wnd.soundManager.allowPolling = true;   // allow flash to poll for status update..
-        	$wnd.soundManager.beginInit();	        
-			if($wnd.soundManager.play)
-				return true;
-			else
+        	if ($wnd.window.addEventListener) {
+			  $wnd.soundManager.beginDelayedInit();
+			  return true;
+			} else if ($wnd.window.attachEvent) {
+			  $wnd.soundManager.beginInit();
+			  return true;
+			} else {
 				return false;
+			}			
 	    ]]>     	
     </script>
     
