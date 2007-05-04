@@ -1,25 +1,32 @@
 package org.miller.gwt.client.sound;
 
+/**
+ * SoundOptions is a wrapper around every option you can pass into SoundManager.
+ * Each of these options are set on the SMSound object being created.
+ * 
+ * @author JMILLER
+ * 
+ */
 public class SoundOptions {
 
 	private SoundOptions() {
-		
+
 	}
-	
+
 	public static Option id(String id) {
 		return new Option("id", id);
 	}
-	
+
 	public static Option url(String url) {
 		return new Option("url", url);
 	}
-	
+
 	public static Option autoPlay(boolean auto) {
-		return new Option("autoPlay", ""+ auto);
+		return new Option("autoPlay", "" + auto);
 	}
-	
+
 	public static Option autoLoad(boolean auto) {
-		return new Option("autoLoad", "" +auto);
+		return new Option("autoLoad", "" + auto);
 	}
 
 	public static Option multiShot(boolean multishot) {

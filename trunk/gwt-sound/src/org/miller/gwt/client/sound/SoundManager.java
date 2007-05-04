@@ -3,6 +3,18 @@ package org.miller.gwt.client.sound;
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.user.client.Window;
 
+/**
+ * SoundManager is created as a singleton and must be retrieved using
+ * getInstance(). SoundManager controls all playback functionality including
+ * play, stop, resume, pause, setting position and so forth.
+ * 
+ * DefaultOptions are used to set the default options on every SMSound object
+ * created by SoundManager. Any option or callback set under DefaultOptions will
+ * be set for every call to play or createSound.
+ * 
+ * @author JMILLER
+ * 
+ */
 public class SoundManager {
 
 	public static SoundManager soundManager;
@@ -248,10 +260,16 @@ public class SoundManager {
 	 $soundManager.nullURL=url;
 	 }-*/;
 
+	/**
+	 * Creates a sound using an array of SoundOptions. ID and URL are required
+	 * when using this method. If that isn't already implicitly implied.
+	 * 
+	 * @param opts
+	 */
 	public void createSound(Option[] opts) {
 		try {
-		executeCreateSound(OptionUtility.buildOptions(opts));
-		} catch(Exception e) {
+			executeCreateSound(OptionUtility.buildOptions(opts));
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
@@ -260,6 +278,13 @@ public class SoundManager {
 	 $wnd.soundManager.createSound(obj);
 	 }-*/;
 
+	/**
+	 * 
+	 * @param id
+	 *            of the sound to be created.
+	 * @param path
+	 *            to the sound.
+	 */
 	public void createSound(String id, String path) {
 		executeCreateSound(id, path);
 	}
@@ -268,6 +293,12 @@ public class SoundManager {
 	 $wnd.soundManager.createSound(id, path);
 	 }-*/;
 
+	/**
+	 * destroys any sound created and removed it from SoundManager.
+	 * 
+	 * @param id
+	 *            of the sound to be destroyed
+	 */
 	public void destroySound(String id) {
 		executeDestroySound(id);
 	}
@@ -276,6 +307,13 @@ public class SoundManager {
 	 $wnd.soundManager.destroySound(id); 	
 	 }-*/;
 
+	/**
+	 * Used after a call to createSound. For example you can create a sound,
+	 * then wait for it to load before calling this play method.
+	 * 
+	 * @param id
+	 *            of the sound to play.
+	 */
 	public void play(String id) {
 		executePlay(id);
 	}
@@ -300,6 +338,14 @@ public class SoundManager {
 	 $wnd.soundManager.setPosition(id, milliseconds); 	
 	 }-*/;
 
+	/**
+	 * Volume is adjusted from 0-100
+	 * 
+	 * @param id
+	 *            of the sound.
+	 * @param volume
+	 *            to set.
+	 */
 	public void setVolume(String id, int volume) {
 		volume(id, volume);
 	}
@@ -308,6 +354,14 @@ public class SoundManager {
 	 $wnd.soundManager.volume(id, volume); 	
 	 }-*/;
 
+	/**
+	 * Simplest way to play a sound.
+	 * 
+	 * @param id
+	 *            of the sound to play.
+	 * @param path
+	 *            to the sound.
+	 */
 	public void play(String id, String path) {
 		executePlay(id, path);
 	}
@@ -316,6 +370,12 @@ public class SoundManager {
 	 $wnd.soundManager.play(id, path); 	
 	 }-*/;
 
+	/**
+	 * Stop playing sound.
+	 * 
+	 * @param id
+	 *            of the sound to stop playing.
+	 */
 	public void stop(String id) {
 		executeStop(id);
 	}
@@ -324,6 +384,11 @@ public class SoundManager {
 	 $wnd.soundManager.stop(id);
 	 }-*/;
 
+	/**
+	 * Stops all sounds from playing. If you enable multishot and layer sounds
+	 * this will stop them all from playing.
+	 * 
+	 */
 	public void stopAll() {
 		executeStopAll();
 	}
@@ -332,6 +397,12 @@ public class SoundManager {
 	 $wnd.soundManager.stopAll(); 	
 	 }-*/;
 
+	/**
+	 * Stops loading any currently loading sound.
+	 * 
+	 * @param id
+	 *            of the sound to unload.
+	 */
 	public void unload(String id) {
 		executeUnload(id);
 	}
@@ -340,6 +411,12 @@ public class SoundManager {
 	 $wnd.soundManager.unload(id); 	
 	 }-*/;
 
+	/**
+	 * Pauses the sound if it isn't already paused.
+	 * 
+	 * @param id
+	 *            of the sound to pause.
+	 */
 	public void pause(String id) {
 		executePause(id);
 	}
@@ -348,6 +425,12 @@ public class SoundManager {
 	 $wnd.soundManager.pause(id);
 	 }-*/;
 
+	/**
+	 * Resumes the sound if it was paused.
+	 * 
+	 * @param id
+	 *            of the sound to resume.
+	 */
 	public void resume(String id) {
 		executeResume(id);
 	}
@@ -356,6 +439,12 @@ public class SoundManager {
 	 $wnd.soundManager.resume(id);
 	 }-*/;
 
+	/**
+	 * Toggles between pause and resume based on the state of the sound.
+	 * 
+	 * @param id
+	 *            of the sound to toggle.
+	 */
 	public void togglePause(String id) {
 		executeTogglePause(id);
 	}
@@ -364,6 +453,11 @@ public class SoundManager {
 	 $wnd.soundManager.togglePause(id);
 	 }-*/;
 
+	/**
+	 * @param id
+	 *            of the sound.
+	 * @return the SMSound of a sound created by SoundManager.
+	 */
 	public SMSound getSoundById(String id) {
 		return new SMSound(getSMSound(id));
 	}
@@ -372,6 +466,10 @@ public class SoundManager {
 	 return $wnd.soundManager.getSoundById(id);
 	 }-*/;
 
+	/**
+	 * Load sounds from XML.
+	 * @param XMLURL
+	 */
 	public void loadFromXML(String XMLURL) {
 		executeLoadFromXML(XMLURL);
 	}

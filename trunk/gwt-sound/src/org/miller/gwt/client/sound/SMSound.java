@@ -2,6 +2,17 @@ package org.miller.gwt.client.sound;
 
 import com.google.gwt.core.client.JavaScriptObject;
 
+/**
+ * SMSound objects are created everytime SoundManager creates a sound. You can
+ * retrieve SMSound objects from SoundManager by calling getSoundById and
+ * passing in the id that was passed to SoundManager to create the sound.
+ * SMSound is used to collect data on the sound loaded up by SoundManager. To
+ * use callbacks on a particular sound use SoundOptions callbacks when creating
+ * the sound initially.
+ * 
+ * @author JMILLER
+ * 
+ */
 public class SMSound {
 
 	private JavaScriptObject obj;
@@ -151,107 +162,5 @@ public class SMSound {
 
 	private native boolean didJustBeforeFinish()/*-{
 	 return this.@org.miller.gwt.client.sound.SMSound::obj.didJustBeforeFinish;
-	 }-*/;
-
-	// ============= NOT SURE HOW EFFECTIVE THESE CALLBACKS ARE ===========
-
-	public void whileLoading(Callback callback) {
-		executeWhileLoading(callback);
-	}
-
-	private native boolean executeWhileLoading(Callback callback)/*-{
-	 this.@org.miller.gwt.client.sound.SMSound::obj.whileloading = function() {		
-	 callback.@org.miller.gwt.client.sound.Callback::execute()();
-	 }
-	 }-*/;
-
-	public void whilePlaying(Callback callback) {
-		executeWhilePlaying(callback);
-	}
-
-	private native boolean executeWhilePlaying(Callback callback)/*-{
-	 this.@org.miller.gwt.client.sound.SMSound::obj.whileplaying = function() {		
-	 callback.@org.miller.gwt.client.sound.Callback::execute()();
-	 }
-	 }-*/;
-
-	public void onLoad(Callback callback) {
-		executeOnLoad(callback);
-	}
-
-	private native void executeOnLoad(Callback callback)/*-{
-	 this.@org.miller.gwt.client.sound.SMSound::obj.onload = function() {		
-	 callback.@org.miller.gwt.client.sound.Callback::execute()();
-	 }
-	 }-*/;
-
-	public void onPlay(Callback callback) {
-		executeOnPlay(callback);
-	}
-
-	private native void executeOnPlay(Callback callback)/*-{
-	 this.@org.miller.gwt.client.sound.SMSound::obj.onplay = function() {		
-	 callback.@org.miller.gwt.client.sound.Callback::execute()();
-	 }
-	 }-*/;
-
-	public void onStop(Callback callback) {
-		executeOnStop(callback);
-	}
-
-	private native void executeOnStop(Callback callback) /*-{
-	 this.@org.miller.gwt.client.sound.SMSound::obj.onstop = function() {		
-	 callback.@org.miller.gwt.client.sound.Callback::execute()();
-	 }
-	 }-*/;
-
-	public void onFinish(Callback callback) {
-		executeOnFinish(callback);
-	}
-
-	private native void executeOnFinish(Callback callback) /*-{
-	 this.@org.miller.gwt.client.sound.SMSound::obj.onfinish = function() {		
-	 callback.@org.miller.gwt.client.sound.Callback::execute()();
-	 }
-	 }-*/;
-
-	public void onBeforeFinishComplete(Callback callback) {
-		executeOnBeforeFinishComplete(callback);
-	}
-
-	private native void executeOnBeforeFinishComplete(Callback callback) /*-{
-	 this.@org.miller.gwt.client.sound.SMSound::obj.onbeforefinishcomplete = function() {		
-	 callback.@org.miller.gwt.client.sound.Callback::execute()();
-	 }
-	 }-*/;
-
-	public void onBeforeFinish(Callback callback) {
-		executeOnBeforeFinish(callback);
-	}
-
-	private native void executeOnBeforeFinish(Callback callback) /*-{
-	 this.@org.miller.gwt.client.sound.SMSound::obj.onbeforefinish = function() {		
-	 callback.@org.miller.gwt.client.sound.Callback::execute()();
-	 }
-	 }-*/;
-
-	public void onJustBeforeFinish(Callback callback) {
-		executeOnJustBeforeFinish(callback);
-	}
-
-	private native void executeOnJustBeforeFinish(Callback callback) /*-{
-	 this.@org.miller.gwt.client.sound.SMSound::obj.onjustbeforefinish = function() {		
-	 callback.@org.miller.gwt.client.sound.Callback::execute()();
-	 }
-	 }-*/;
-
-	public void onID3(Callback callback) {
-		executeOnID3(callback);
-	}
-
-	private native void executeOnID3(Callback callback)/*-{
-	 this.@org.miller.gwt.client.sound.SMSound::obj.onid3 = function() {
-	 callback.@org.miller.gwt.client.sound.Callback::execute()();
-	 }
 	 }-*/;
 }
