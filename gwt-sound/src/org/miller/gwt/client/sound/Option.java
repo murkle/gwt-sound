@@ -25,10 +25,6 @@ package org.miller.gwt.client.sound;
  * href="http://wiki.script.aculo.us/scriptaculous/tags/effects">scriptaculous
  * wiki</a>.
  * </p>
- * <p>
- * You can also register callbacks which observe an effect's progress, for an
- * example see {@link Effect}.
- * </p>
  * 
  * @author rhanson
  * @author george georgovassilis
