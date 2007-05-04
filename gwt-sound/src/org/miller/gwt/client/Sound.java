@@ -76,16 +76,32 @@ public class Sound implements EntryPoint {
 		play.addClickListener(new ClickListener() {
 			public void onClick(Widget sender) {
 				duration.setText("0/0");
-				// sm.play(SOUND_ID, "sound/Mist.mp3");
-				// sm.createSound(SOUND_ID, "sound/Mist.mp3");
-				sm.createSound(new Option[] { SoundOptions.id(SOUND_ID),
-						SoundOptions.url("sound/Mist.mp3"),
-						SoundOptions.onLoad(new Callback() {
+				/**
+				 * 1.) sm.play(SOUND_ID, "sound/Mist.mp3");
+				 * 
+				 * 2.) sm.createSound(SOUND_ID, "sound/Mist.mp3");
+				 * sm.play(SOUND_ID);
+				 * 
+				 * 3.) sm.createSound(new Option[] { SoundOptions.id(SOUND_ID),
+				 * SoundOptions.url("sound/Mist.mp3"), SoundOptions.onLoad(new
+				 * Callback() { public void execute() { Window.alert("loaded"); } })
+				 * }); sm.play(SOUND_ID);
+				 * 
+				 * 4.) sm.loadFromXML(XML); sm.play(SOUND_ID);
+				 */
+
+				final String XML = "<items baseHref=\"sound/\">"
+						+ "<sound id=\"Mist\" href=\"Mist.mp3\"/>"
+						+ "<sound id=\"Hello\" href=\"Hello.mp3\"/>"
+						+ "</items>";
+				sm.loadFromXML(XML);
+				sm.play("Mist", new Option[] {
+						SoundOptions.onFinish(new Callback() {
 							public void execute() {
-								Window.alert("loaded");
+								sm.play("Hello");
 							}
-						}) });
-				sm.play(SOUND_ID);
+						})
+				});
 			}
 		});
 
