@@ -467,7 +467,10 @@ public class SoundManager {
 	 }-*/;
 
 	/**
-	 * Load sounds from XML.
+	 * Load sounds from XML. Only the defaultOptions will be loaded into each
+	 * sound. Impossible to explicitly set properties and callbacks on XML
+	 * otherwise.
+	 * 
 	 * @param XMLURL
 	 */
 	public void loadFromXML(String XMLURL) {
