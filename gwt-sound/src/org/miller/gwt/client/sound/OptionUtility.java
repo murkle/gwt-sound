@@ -17,7 +17,8 @@ import com.google.gwt.core.client.JavaScriptObject;
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * 
- * Code lifted from gwt-widgets-library, good implementation
+ * Code lifted from gwt-widgets-library, good implementation.  I wrapped 
+ * it in a utility helper class to make it a little bit more portable.
  */
 public class OptionUtility {
 	public static JavaScriptObject buildOptions(Option[] opts) {
@@ -27,7 +28,7 @@ public class OptionUtility {
 			if (value instanceof Callback)
 				addCallback(jso, opts[i].getName(), (Callback) value);
 			else
-				addOption(jso, opts[i].getName(), (String)value);
+				addOption(jso, opts[i].getName(), (String) value);
 		}
 		return jso;
 	}
