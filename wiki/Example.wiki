@@ -33,8 +33,10 @@
 		sm.getDefaultOptions().autoLoad(true);
 		sm.getDefaultOptions().onFinish(new Callback() {
 			public void execute() {
-				playListIndex++;
-				sm.play((String) soundIDs.get(playListIndex));
+				if (playListIndex < (soundIDs.size() - 1)) {
+					playListIndex++;
+					sm.play((String) soundIDs.get(playListIndex));
+				}
 			}
 		});
 		sm.getDefaultOptions().onLoad(new Callback() {
@@ -65,7 +67,7 @@
 		stop.setEnabled(false);
 		back.setEnabled(false);
 		toggle.setEnabled(false);
-		
+
 		play.addClickListener(new ClickListener() {
 			public void onClick(Widget sender) {
 				duration.setText("0:00/0:00");
@@ -104,22 +106,22 @@
 
 		back.addClickListener(new ClickListener() {
 			public void onClick(Widget sender) {
-				sm.stop((String)soundIDs.get(playListIndex));
-				if(playListIndex > 0)
+				sm.stop((String) soundIDs.get(playListIndex));
+				if (playListIndex > 0)
 					playListIndex--;
-				sm.play((String)soundIDs.get(playListIndex));
+				sm.play((String) soundIDs.get(playListIndex));
 			}
 		});
-		
+
 		next.addClickListener(new ClickListener() {
 			public void onClick(Widget sender) {
-				sm.stop((String)soundIDs.get(playListIndex));
-				if(playListIndex < (soundIDs.size() - 1))
+				sm.stop((String) soundIDs.get(playListIndex));
+				if (playListIndex < (soundIDs.size() - 1))
 					playListIndex++;
-				sm.play((String)soundIDs.get(playListIndex));
+				sm.play((String) soundIDs.get(playListIndex));
 			}
 		});
-		
+
 		player.add(back);
 		player.add(play);
 		player.add(toggle);
@@ -163,7 +165,7 @@
 		}
 
 	}
-	
+
 	private String formatTime(int sec) {
 		int minutes = (sec / 60);
 		int seconds = (sec - minutes) % 60;
