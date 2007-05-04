@@ -699,7 +699,7 @@ function SMSound(oSM,oOptions) {
 }
 
 var soundManager = new SoundManager();
-
+soundManager.debugMode = false;
 // attach onload handler
 if (window.addEventListener) {
   window.addEventListener('load',soundManager.beginDelayedInit,false);
