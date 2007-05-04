@@ -40,7 +40,7 @@ public class SMSound {
 	/**
 	 * Need to abstract out again to make ID3 an actual object
 	 * 
-	 * @return
+	 * @return ID3
 	 */
 	public ID3 getID3() {
 		return new ID3(id3());
@@ -123,7 +123,7 @@ public class SMSound {
 	 * 1 = playing or buffering sound (play has been called, waiting for data
 	 * etc.)
 	 * 
-	 * @return
+	 * @return play state
 	 */
 	private native int playState()/*-{
 	 return this.@org.miller.gwt.client.sound.SMSound::obj.playState;
@@ -142,7 +142,7 @@ public class SMSound {
 	 * 
 	 * 3 = loaded/success
 	 * 
-	 * @return
+	 * @return ready state
 	 */
 	private native int readyState()/*-{
 	 return this.@org.miller.gwt.client.sound.SMSound::obj.readyState;
