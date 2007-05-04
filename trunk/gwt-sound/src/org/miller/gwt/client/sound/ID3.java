@@ -4,7 +4,7 @@ import com.google.gwt.core.client.JavaScriptObject;
 
 /**
  * The ID3 class wraps the ID3 properties that Flash can interpret within a MP3
- * file.  There maybe more ID3 tags that will or won't work.  
+ * file. There maybe more ID3 tags that will or won't work.
  * 
  * @author JMILLER
  * 
@@ -177,7 +177,16 @@ public class ID3 {
 		return v2;
 	}
 
-	private native String getProperty(String prop)/*-{
+	private String getProperty(String property) {
+		try {
+			return property(property);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return "Not Found";
+		}
+	}
+
+	private native String property(String prop)/*-{
 	 return this.@org.miller.gwt.client.sound.ID3::obj[prop];
 	 }-*/;
 }
