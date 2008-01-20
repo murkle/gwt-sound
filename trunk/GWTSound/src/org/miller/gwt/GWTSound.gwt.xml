@@ -1,0 +1,10 @@
+<module>
+
+	<!-- Inherit the core Web Toolkit stuff.                  -->
+	<inherits name='com.google.gwt.user.User'/>
+	<inherits name='org.miller.gwt.GWTSound'/>
+	<inherits name='org.miller.gwt.Sound'/>
+	<!-- Specify the app entry point class.                   -->
+	<entry-point class='org.miller.gwt.client.GWTSound'/>
+  
+</module>

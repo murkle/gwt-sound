@@ -1,0 +1,1 @@
+@java -Dgwt.args="-web -out www-test" -cp "%~dp0\src;%~dp0\test;%~dp0\bin;%~dp0\..\junit-4.3.1.jar;C:/Users/jtmille3/Downloads/gwt-windows-1.3.3/gwt-windows-1.3.3/gwt-user.jar;C:/Users/jtmille3/Downloads/gwt-windows-1.3.3/gwt-windows-1.3.3/gwt-dev-windows.jar" junit.textui.TestRunner org.miller.gwt.client.test.TestSuite %*
